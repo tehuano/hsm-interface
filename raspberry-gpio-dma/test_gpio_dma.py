@@ -4,7 +4,7 @@ import sys
 import os 
 
 NUM = 16      
-# libfun loaded to the python file 
+# gpio_dma.so loaded to the python file 
 # using fun.myFunction(), 
 # C function can be accessed 
 # but type of argument is the problem. 
