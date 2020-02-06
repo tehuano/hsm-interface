@@ -8,10 +8,14 @@ from Tkinter import *
  
 class MyView(Frame):
     def loadView(self):
-        quitButton = Button(self.frame,text = 'Quit', command= self.vc.quitButtonPressed).grid(row = 0,column = 0)
-        addButton = Button(self.frame,text = "Add", command = self.vc.addButtonPressed).grid(row = 0, column = 1)
-        entry = Entry(self.frame,textvariable = self.entry_text).grid(row = 1, column = 0, columnspan = 3, sticky = EW)
-        label = Label(self.frame,textvariable = self.label_text).grid(row = 2, column = 0, columnspan = 3, sticky = EW)
+        quitButton = Button(self.frame,text = 'Salir', 
+            command= self.vc.salirButtonPressed).grid(row = 0,column = 0)
+        addButton = Button(self.frame,text = "Calcular",
+            command = self.vc.calcularButtonPressed).grid(row = 0, column = 1)
+        entry = Entry(self.frame,textvariable = self.entry_text).grid(row = 1,
+            column = 0, columnspan = 3, sticky = EW)
+        label = Label(self.frame,textvariable = self.label_text).grid(row = 2,
+            column = 0, columnspan = 3, sticky = EW)
     def __init__(self,vc):
         self.frame=Frame()
         self.frame.grid(row = 0,column=0)

@@ -9,7 +9,7 @@ NUM = 16
 # C function can be accessed 
 # but type of argument is the problem. 
                          
-fun = ctypes.CDLL(os.path.abspath('./gpio_dma.so'))
+fun = ctypes.CDLL(os.path.abspath('./gpio_driver.so'))
 print fun
 
 # Now whenever argument  
@@ -22,4 +22,8 @@ print fun
 # returnValue is the value  
 # return by function written in C  
 # code 
-returnVale = fun.usage(sys.argv[0])
+returnVale = fun.init()
+
+fun.send_byte(0xaa)
+for x in range(10):
+    fun.send_byte(x)

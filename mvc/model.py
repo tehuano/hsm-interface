@@ -7,7 +7,7 @@
 class MyModel():
     def __init__(self,vc):
         self.vc = vc
-        self.myList = ['duck','duck','goose']
+        self.myList = []
         self.count = 0
 #Delegates-- Model would call this on internal change
     def listChanged(self):
@@ -21,5 +21,10 @@ class MyModel():
         print("returned")
         myList = self.myList
         myList.append(item)
-        self.myList=myList
+        self.myList = myList
         self.listChanged()
+    def clearList(self):
+        print("cleared")
+        myList = self.myList
+        del myList[:]
+        self.myList = myList
