@@ -5,7 +5,7 @@ import os
 
 # gpio_dma.so loaded to the python file 
 # C functions can be accessed 
-low_level_driver = ctypes.CDLL(os.path.abspath('../raspberry-gpio-dma/gpio_dma.so'))
+low_level_driver = ctypes.CDLL(os.path.abspath('../lib/gpio_driver.so'))
   
 #Controller: Ties View and Model together.
 #       --Performs actions based on View events.

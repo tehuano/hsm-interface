@@ -12,8 +12,9 @@ test_gpio_driver.a: test_gpio_driver.o gpio_driver.o
 	chmod +x test_gpio_driver.a
 
 gpio_driver.so: gpio_driver.o 
-	gcc -fPIC -shared -o gpio_driver.so gpio_driver.o 
-
+	gcc -fPIC -shared -o gpio_driver.so gpio_driver.o
+	chmod +x gpio_driver.so
+	mv gpio_driver.so ../lib
 clean:
 	rm -f *.a *.so *.o
 

@@ -3,10 +3,11 @@
 int  mem_fd;
 void *gpio_map;
 volatile unsigned *gpio;
+
 unsigned char gpio_bus[GPIO_BUS_SIZE] = {24, 4, 17, 22, 9, 25, 18, 23};
 unsigned char clock_pin = 8;
-unsigned char chip_select = 10;
-unsigned char irq_pin = 11;
+unsigned char key_pin = 10;
+unsigned char bus_dir_pin = 21;
 unsigned initialized = 0x00;
 
 // Set up a memory regions to access GPIO
@@ -16,7 +17,6 @@ void setup_io() {
       printf("can't open /dev/mem \n");
       exit(-1);
    }
-
    /* mmap GPIO */
    gpio_map = mmap(
       NULL,             //Any adddress in our space will do
@@ -36,13 +36,14 @@ void setup_io() {
    initialized = 0x01;
 } // setup_io
 
-void send_byte(unsigned char value) {
+void send_key_byte(unsigned char value) {
     int i = 0;
     if (0x00 == initialized) {
         init();
     }        
     GPIO_CLR = 1 << clock_pin;
-    GPIO_SET = 1 << chip_select;
+    GPIO_SET = 1 << bus_dir_pin;
+    GPIO_SET = 1 << key_pin;
     for(i = 0; i < GPIO_BUS_SIZE; i++) {
         INP_GPIO(gpio_bus[i]); 
         OUT_GPIO(gpio_bus[i]);
@@ -52,9 +53,38 @@ void send_byte(unsigned char value) {
             GPIO_CLR = 1 << gpio_bus[i];
         }
     }
+    usleep(CLK_DELAY);
     GPIO_SET = 1 << clock_pin;
+    usleep(CLK_DELAY);
     GPIO_CLR = 1 << clock_pin;
-    GPIO_CLR = 1 << chip_select;
+    GPIO_CLR = 1 << bus_dir_pin;
+    GPIO_CLR = 1 << key_pin;
+    usleep(CLK_DELAY);
+    printf("Out: %x\n", value);
+}
+
+void send_data_byte(unsigned char value) {
+    int i = 0;
+    if (0x00 == initialized) {
+        init();
+    }        
+    GPIO_CLR = 1 << clock_pin;
+    GPIO_SET = 1 << bus_dir_pin;
+    for(i = 0; i < GPIO_BUS_SIZE; i++) {
+        INP_GPIO(gpio_bus[i]); 
+        OUT_GPIO(gpio_bus[i]);
+        if (0x01 == ((value >> i) & 0x01)) {
+            GPIO_SET = 1 << gpio_bus[i];
+        } else {
+            GPIO_CLR = 1 << gpio_bus[i];
+        }
+    }
+    usleep(CLK_DELAY);
+    GPIO_SET = 1 << clock_pin;
+    usleep(CLK_DELAY);
+    GPIO_CLR = 1 << clock_pin;
+    GPIO_CLR = 1 << bus_dir_pin;
+    usleep(CLK_DELAY);
     printf("Out: %x\n", value);
 }
 
@@ -64,33 +94,28 @@ unsigned char get_byte() {
     if (0x00 == initialized) {
         init();
     }        
-    GPIO_CLR = 1 << chip_select;
+    GPIO_CLR = 1 << bus_dir_pin;
     GPIO_SET = 1 << clock_pin;
-    GPIO_CLR = 1 << clock_pin;
+    usleep(CLK_DELAY);
     for(i = 0; i < GPIO_BUS_SIZE; i++) {
         INP_GPIO(gpio_bus[i]);
         if (GET_GPIO(gpio_bus[i])) {
             value |= 1 << i;
         }
     }
+    GPIO_CLR = 1 << clock_pin;
+    usleep(CLK_DELAY);
     printf("In: %x\n", value);
     return value;
 }
 
-unsigned char read_irq_pin(){
-    unsigned char value = 0x00;
-    if (GET_GPIO(irq_pin)) {
-        value = 0x01;
-    }
-    return value;
-}
-        
 void init(){
     setup_io();
     INP_GPIO(clock_pin); 
     OUT_GPIO(clock_pin);
-    INP_GPIO(chip_select); 
-    OUT_GPIO(chip_select);
-    INP_GPIO(irq_pin); 
+    INP_GPIO(key_pin); 
+    OUT_GPIO(key_pin);
+    INP_GPIO(bus_dir_pin); 
+    OUT_GPIO(bus_dir_pin); 
     printf("Driver initialized\n");
 }
