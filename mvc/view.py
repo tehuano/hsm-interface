@@ -8,27 +8,21 @@ from Tkinter import *
  
 class MyView(Frame):
     def loadView(self):
-        label_llave = Label(self.frame,textvariable = self.label_text_llave).grid(row = 1,
-            column = 0, columnspan = 3, sticky = EW)
-        label_mensaje = Label(self.frame,textvariable = self.label_text_mensaje).grid(row = 2,
-            column = 0, columnspan = 3, sticky = EW)
-        entry_llave = Entry(self.frame,textvariable = self.entry_text_llave).grid(row = 1,
-            column = 1, columnspan = 3, sticky = EW)
-        entry_mensaje = Entry(self.frame,textvariable = self.entry_text_mensaje).grid(row = 2,
-            column = 1, columnspan = 3, sticky = EW)
-        label_resultado = Label(self.frame,textvariable = self.label_text_resultado).grid(row = 4,
-            column = 0, columnspan = 4, sticky = EW)
-        quitButton = Button(self.frame,text = 'Salir', 
-            command= self.vc.salirButtonPressed).grid(row = 3,column = 0)
-        addButton = Button(self.frame,text = "Calcular",
-            command = self.vc.calcularButtonPressed).grid(row = 3, column = 2)
+        welcome = Label(self.frame, text="XOR Cipher Interface")
+        welcome.config(font=('Arial', 12))
+        welcome.grid(row=0, padx = 30, pady = 5, columnspan = 3)
+        label_llave = Label(self.frame,textvariable = self.label_text_llave).grid(row = 1, padx = 10, sticky = W)
+        label_mensaje = Label(self.frame,textvariable = self.label_text_mensaje).grid(row = 2, padx = 10, sticky = W)
+        entry_llave = Entry(self.frame,textvariable = self.entry_text_llave).grid(row = 1,column = 1, columnspan = 4, sticky = W)
+        entry_mensaje = Entry(self.frame,textvariable = self.entry_text_mensaje).grid(row = 2, column = 1, columnspan = 4, sticky = W)
+        quitButton = Button(self.frame,text = 'Salir', command= self.vc.salirButtonPressed, highlightbackground='#3E4149').grid(row = 3, column = 2, pady = 5)
+        addButton = Button(self.frame,text = "Calcular", command = self.vc.calcularButtonPressed, highlightbackground='#3E4149').grid(row = 3, column = 1, pady = 5)
+        label_resultado = Label(self.frame,textvariable = self.label_text_resultado).grid(row = 4, padx = 10, pady = 10, columnspan = 4, sticky = W)
+
     def __init__(self,vc):
-        vc.parent.geometry("500x200+200+200")
+        vc.parent.geometry("300x150+150+200")
         self.frame=Frame()
         self.frame.grid(row = 0,column=1)
-        welcome = Label(self.frame, text="HSM Interface")
-        welcome.config(font=('Arial', 14))
-        welcome.grid(row=0, column=1)
         self.vc = vc
         self.entry_text_llave = StringVar()
         self.entry_text_llave.set('')

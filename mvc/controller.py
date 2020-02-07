@@ -5,7 +5,8 @@ import os
 
 # gpio_dma.so loaded to the python file 
 # C functions can be accessed 
-low_level_driver = ctypes.CDLL(os.path.abspath('../lib/gpio_driver.so'))
+
+#low_level_driver = ctypes.CDLL(os.path.abspath('../lib/gpio_driver.so'))
   
 #Controller: Ties View and Model together.
 #       --Performs actions based on View events.
@@ -25,7 +26,7 @@ class MyController():
         self.parent.destroy()
     def calcularButtonPressed(self):
         self.view.setLabel_text(self.view.entry_text.get())
-        low_level_driver.usage('test')
+        #low_level_driver.usage('test')
         self.model.clearList()
         self.model.addToList('msg')
         self.model.addToList('key')
