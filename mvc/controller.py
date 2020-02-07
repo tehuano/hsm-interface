@@ -19,7 +19,7 @@ class MyController():
         #initialize objects in view
         #a non cheat way to do MVC wiht tkinter control variables
         #self.view.setEntry_text('Data') 
-        self.view.setLabel_text('Resultado')
+        self.view.setLabel_text('>')
      #event handlers
     def salirButtonPressed(self):
         self.parent.destroy()
