@@ -9,6 +9,11 @@ unsigned char clock_pin = 8;
 unsigned char key_pin = 10;
 unsigned char bus_dir_pin = 21;
 unsigned initialized = 0x00;
+unsigned char debug_flag = 0x01;
+
+void set_debug_flag(unsigned char v) {
+    debug_flag = v;
+}
 
 // Set up a memory regions to access GPIO
 void setup_io() {
@@ -60,7 +65,9 @@ void send_key_byte(unsigned char value) {
     GPIO_CLR = 1 << bus_dir_pin;
     GPIO_CLR = 1 << key_pin;
     usleep(CLK_DELAY);
-    printf("Out: %x\n", value);
+    if (debug_flag) {
+       printf("Out: \t%c,\t%x\n", value, value);
+    }
 }
 
 void send_data_byte(unsigned char value) {
@@ -85,7 +92,9 @@ void send_data_byte(unsigned char value) {
     GPIO_CLR = 1 << clock_pin;
     GPIO_CLR = 1 << bus_dir_pin;
     usleep(CLK_DELAY);
-    printf("Out: %x\n", value);
+    if (debug_flag) {
+        printf("Out: \t%c,\t%x\n", value, value);
+    }
 }
 
 unsigned char get_byte() {
@@ -105,7 +114,9 @@ unsigned char get_byte() {
     }
     GPIO_CLR = 1 << clock_pin;
     usleep(CLK_DELAY);
-    printf("In: %x\n", value);
+    if (debug_flag) {
+        printf("In: \t%c,\t%x\n", value, value);
+    }
     return value;
 }
 

@@ -34,6 +34,7 @@ extern void *gpio_map;
 // I/O access
 extern volatile unsigned *gpio;
 extern unsigned char gpio_bus[GPIO_BUS_SIZE];
+extern unsigned char debug_flag;
 
 // GPIO setup macros. Always use INP_GPIO(x) before using OUT_GPIO(x) or SET_GPIO_ALT(x,y)
 #define INP_GPIO(g) *(gpio+((g)/10)) &= ~(7<<(((g)%10)*3))
@@ -48,6 +49,7 @@ extern unsigned char gpio_bus[GPIO_BUS_SIZE];
 #define GPIO_PULL *(gpio+37) // Pull up/pull down
 #define GPIO_PULLCLK0 *(gpio+38) // Pull up/pull down clock
 
+void set_debug_flag(unsigned char v);
 // this function prints to a register
 unsigned char read_byte();
 // this function sends a data to the gpio

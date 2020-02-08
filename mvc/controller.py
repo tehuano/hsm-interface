@@ -2,11 +2,18 @@ from model import MyModel
 from view import MyView
 import ctypes 
 import os 
+import time
 
 # gpio_dma.so loaded to the python file 
 # C functions can be accessed 
 
-#low_level_driver = ctypes.CDLL(os.path.abspath('../lib/gpio_driver.so'))
+low_level_driver = ctypes.CDLL(os.path.abspath('../lib/gpio_driver.so'))
+low_level_driver.get_byte.restype = ctypes.c_ubyte
+#fun.get_byte.argtypes = [None]
+low_level_driver.send_key_byte.argtypes = [ctypes.c_ubyte]
+low_level_driver.send_data_byte.argtypes = [ctypes.c_ubyte]
+returnVale = low_level_driver.init()
+low_level_driver.set_debug_flag(0x00)
   
 #Controller: Ties View and Model together.
 #       --Performs actions based on View events.
@@ -42,8 +49,15 @@ class MyController():
         msg = in_list[1]
         values = []
         print("Key = ", key)
+        start = time.time()
+        low_level_driver.send_key_byte(ord(key))
+        time.sleep(0.1)
         for x in msg:
-            print("In: ", x)
-            values.append(chr(ord(key) ^ ord(x)))
+            low_level_driver.send_data_byte(ord(x))
+            time.sleep(0.1)
+            val = chr(low_level_driver.get_byte())
+            time.sleep(0.1)
+            values.append(val)
+        print("Transaction finished. Time = ", time.time()-start)
         print(values)
         return ''.join(values)
