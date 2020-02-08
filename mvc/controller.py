@@ -48,16 +48,23 @@ class MyController():
         key = in_list[0]
         msg = in_list[1]
         values = []
-        print("Key = ", key)
+        print("Key = ", key, ord(key))
         start = time.time()
-        low_level_driver.send_key_byte(ord(key))
-        time.sleep(0.1)
+        vs = []
         for x in msg:
+            vs.append(ord(x))
+        print(vs)
+        vv = []
+        low_level_driver.send_key_byte(ord(key))
+        for x in msg:
+            time.sleep(0.01)
             low_level_driver.send_data_byte(ord(x))
-            time.sleep(0.1)
-            val = chr(low_level_driver.get_byte())
-            time.sleep(0.1)
+            time.sleep(0.01)
+            v = low_level_driver.get_byte()
+            val = unichr(v)
             values.append(val)
+            vv.append(v)
         print("Transaction finished. Time = ", time.time()-start)
         print(values)
+        print(vv)
         return ''.join(values)

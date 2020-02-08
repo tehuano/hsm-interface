@@ -1,18 +1,7 @@
-// Memory Mapped GPIO example
-// mmgpio.cpp
-//http:elinux.org/RPi_GPIO_Code_Samples
-//
 // How to access GPIO registers from C-code on the Raspberry-Pi
-// Example program
-// 15-January-2012
-// Dom and Gert
-// Revised: 15-Feb-2013
-
 // Raspberry Pi 1, Raspberry Pi 2, or Raspberry Pi 3
-
 //#define BCM2708_PERI_BASE 0x20000000 /* Pi 1 */
 #define BCM2708_PERI_BASE 0x3F000000 /* Pi 2 & Pi 3 */
-
 #define GPIO_BASE (BCM2708_PERI_BASE + 0x200000) /* GPIO controller */
 
 
@@ -26,7 +15,7 @@
 #define BLOCK_SIZE (4*1024)
 
 #define GPIO_BUS_SIZE 8
-#define CLK_DELAY  10
+#define CLK_DELAY  20
 
 extern int  mem_fd;
 extern void *gpio_map;

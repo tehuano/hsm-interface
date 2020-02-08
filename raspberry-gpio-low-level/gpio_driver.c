@@ -77,6 +77,7 @@ void send_data_byte(unsigned char value) {
     }        
     GPIO_CLR = 1 << clock_pin;
     GPIO_SET = 1 << bus_dir_pin;
+    usleep(CLK_DELAY);
     for(i = 0; i < GPIO_BUS_SIZE; i++) {
         INP_GPIO(gpio_bus[i]); 
         OUT_GPIO(gpio_bus[i]);
@@ -90,6 +91,7 @@ void send_data_byte(unsigned char value) {
     GPIO_SET = 1 << clock_pin;
     usleep(CLK_DELAY);
     GPIO_CLR = 1 << clock_pin;
+    usleep(CLK_DELAY);
     GPIO_CLR = 1 << bus_dir_pin;
     usleep(CLK_DELAY);
     if (debug_flag) {

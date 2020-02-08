@@ -15,10 +15,14 @@ class MyView(Frame):
         label_mensaje = Label(self.frame,textvariable = self.label_text_mensaje).grid(row = 2, padx = 10, pady =5, sticky = W)
         entry_llave = Entry(self.frame,textvariable = self.entry_text_llave).grid(row = 1,column = 1, columnspan = 4, pady = 5, sticky = W)
         entry_mensaje = Entry(self.frame,textvariable = self.entry_text_mensaje).grid(row = 2, column = 1, columnspan = 4, pady = 5, sticky = W)
-        quitButton = Button(self.frame,text = 'Salir', command= self.vc.salirButtonPressed, highlightbackground='#3E4149').grid(row = 3, column = 2, pady = 5)
-        addButton = Button(self.frame,text = "Calcular", command = self.vc.calcularButtonPressed, highlightbackground='#3E4149').grid(row = 3, column = 1, pady = 5)
-        label_title = Label(self.frame, text="Resultado:").grid(row = 4, padx = 10, pady = 8, sticky = W)
-        entry_resultado = Entry(self.frame,textvariable = self.label_text_resultado).grid(row = 4, column = 1, pady = 8, columnspa = 3, sticky = W)
+        quitButton = Button(self.frame,text = 'Salir', command= self.vc.salirButtonPressed,
+            highlightbackground='#3E4149').grid(row = 3, column = 2, pady = 5)
+        addButton = Button(self.frame,text = "Calcular", command = self.vc.calcularButtonPressed,
+            highlightbackground='#3E4149').grid(row = 3, column = 1, pady = 5)
+        label_title = Label(self.frame, text="Resultado:").grid(row = 4,
+            padx = 10, pady = 8, sticky = W)
+        entry_resultado = Entry(self.frame,textvariable = self.label_text_resultado).grid(row = 4,
+            column = 1, pady = 8, columnspa = 3, sticky = W)
 
     def __init__(self,vc):
         vc.parent.geometry("280x180+150+200")
