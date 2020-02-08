@@ -1,0 +1,29 @@
+# Reading D:/altera/13.1/modelsim_ase/tcl/vsim/pref.tcl 
+# do gpio_hsm_tb.do 
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module gpio_hsm
+# 
+# Top level modules:
+# 	gpio_hsm
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module tranceiver
+# 
+# Top level modules:
+# 	tranceiver
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module gpio_hsm_tb
+# 
+# Top level modules:
+# 	gpio_hsm_tb
+# vsim work.gpio_hsm_tb 
+# Loading work.gpio_hsm_tb
+# Loading work.gpio_hsm
+# Loading work.tranceiver
+# ** Warning: (vsim-3015) ../gpio_hsm_tb.v(29): [PCDPC] - Port size (8 or 8) does not match connection size (7) for port 'FPGA_data'. The port definition is at: ../gpio_hsm.v(26).
+# 
+#         Region: /gpio_hsm_tb/UUT
+# ** Warning: (vsim-3015) ../gpio_hsm_tb.v(29): [PCDPC] - Port size (8 or 8) does not match connection size (7) for port 'FPGA_data'. The port definition is at: ../gpio_hsm.v(26).
+# 
+#         Region: /gpio_hsm_tb/UUT

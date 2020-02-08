@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------- #
 #
-# Copyright (C) 1991-2011 Altera Corporation
+# Copyright (C) 1991-2013 Altera Corporation
 # Your use of Altera Corporation's design tools, logic functions 
 # and other software and tools, and its AMPP partner logic 
 # functions, and any output files from any of the foregoing 
@@ -17,14 +17,14 @@
 # -------------------------------------------------------------------------- #
 #
 # Quartus II 64-Bit
-# Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
-# Date created = 19:04:27  January 26, 2020
+# Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+# Date created = 06:18:53  February 06, 2020
 #
 # -------------------------------------------------------------------------- #
 
-QUARTUS_VERSION = "10.1"
-DATE = "19:04:27  January 26, 2020"
+QUARTUS_VERSION = "13.1"
+DATE = "06:18:53  February 06, 2020"
 
 # Revisions
 
-PROJECT_REVISION = "gpio_hsm_top"
+PROJECT_REVISION = "gpio_hsm"
